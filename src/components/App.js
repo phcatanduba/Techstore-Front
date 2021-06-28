@@ -18,4 +18,7 @@ export default function App() {
 
 const Styles = createGlobalStyle`
     ${reset}
+    a {
+        text-decoration: none;
+    }
 `;
