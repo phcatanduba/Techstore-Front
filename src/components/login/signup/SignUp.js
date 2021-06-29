@@ -1,7 +1,7 @@
-import Container from './Container';
-import Title from './Title';
-import Button from './Button';
-import Redirect from './Redirect';
+import Container from '../Container';
+import Title from '../Title';
+import Button from '../Button';
+import Redirect from '../Redirect';
 import RegisterInputs from './RegisterInputs';
 import { useState } from 'react';
 import axios from 'axios';
@@ -31,9 +31,10 @@ export default function SignUp() {
                 name,
                 email,
                 password,
+                cpf,
             });
             promise.then((res) => {
-                history.push('/');
+                history.push('/sign-in');
             });
         } else {
             alert('SENHAS NAO COINCIDEM');
@@ -49,12 +50,16 @@ export default function SignUp() {
             />
             <Button
                 onClick={() => {
-                    registerRequest(name, email, password);
+                    if (name && email && password) {
+                        registerRequest(name, email, password);
+                    } else {
+                        alert('PREENCHA OS CAMPOS CORRETAMENTE');
+                    }
                 }}
             >
                 Cadastrar
             </Button>
-            <Redirect text="Já tem uma conta? Entre agora!" page="/" />
+            <Redirect text="Já tem uma conta? Entre agora!" page="/sign-in" />
         </Container>
     );
 }

@@ -1,7 +1,8 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
-import SignUp from './signup/SignUp';
+import SignUp from './login/signup/SignUp';
+import SignIn from './login/signin/SignIn';
 
 export default function App() {
     return (
@@ -10,6 +11,9 @@ export default function App() {
             <Switch>
                 <Route path="/sign-up">
                     <SignUp />
+                </Route>
+                <Route path="/sign-in">
+                    <SignIn />
                 </Route>
             </Switch>
         </BrowserRouter>

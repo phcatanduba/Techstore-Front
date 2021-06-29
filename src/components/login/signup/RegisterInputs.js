@@ -22,8 +22,11 @@ export default function LoginInputs({ infos, setInfos, signup }) {
             <input
                 placeholder="CPF"
                 value={cpf}
+                type="number"
                 onChange={(e) => {
-                    setCpf(e.target.value);
+                    if (e.target.value.length < 12) {
+                        setCpf(e.target.value);
+                    }
                 }}
             ></input>
             <input
