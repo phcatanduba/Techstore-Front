@@ -40,7 +40,7 @@ const Inputs = styled.form`
     justify-content: center;
     input {
         margin-bottom: 13px;
-        width: 87%;
+        width: 89%;
         height: 58px;
         border-radius: 5px;
         border: 1px solid #000;
