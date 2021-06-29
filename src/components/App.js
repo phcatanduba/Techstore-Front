@@ -37,4 +37,7 @@ const Styles = createGlobalStyle`
         font-family: 'Roboto', sans-serif;
         box-sizing: border-box;
     }
+    body {
+        background-color:#f7f7f7;
+    }
 `;
