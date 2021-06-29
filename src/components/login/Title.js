@@ -4,7 +4,7 @@ export default function Title({ title }) {
     const message =
         title === 'Cadastro'
             ? 'Por favor, preencha os campos abaixo para criar sua conta na loja'
-            : '';
+            : 'Entre com seu email e senha para continuar';
     return (
         <Container>
             <Logo>{title}</Logo>
