@@ -3,6 +3,7 @@ import LoginInputs from './LoginInputs';
 import Button from '../Button';
 import Redirect from '../Redirect';
 import Container from '../Container';
+import Navbar from '../../navbar/Navbar';
 import axios from 'axios';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -29,21 +30,24 @@ export default function SignIn() {
         });
     }
     return (
-        <Container>
-            <Title title="Entrar" />
-            <LoginInputs
-                emailArray={email}
-                passwordArray={password}
-                login={login}
-            ></LoginInputs>
-            <Button
-                onClick={() => {
-                    login(email[0], password[0]);
-                }}
-            >
-                Entrar
-            </Button>
-            <Redirect text="Primeira vez? Cadastre-se!" page="/sign-up" />
-        </Container>
+        <>
+            <Navbar></Navbar>
+            <Container>
+                <Title title="Entrar" />
+                <LoginInputs
+                    emailArray={email}
+                    passwordArray={password}
+                    login={login}
+                ></LoginInputs>
+                <Button
+                    onClick={() => {
+                        login(email[0], password[0]);
+                    }}
+                >
+                    Entrar
+                </Button>
+                <Redirect text="Primeira vez? Cadastre-se!" page="/sign-up" />
+            </Container>
+        </>
     );
 }

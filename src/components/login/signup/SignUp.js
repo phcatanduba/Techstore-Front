@@ -2,6 +2,7 @@ import Container from '../Container';
 import Title from '../Title';
 import Button from '../Button';
 import Redirect from '../Redirect';
+import Navbar from '../../navbar/Navbar';
 import RegisterInputs from './RegisterInputs';
 import { useState } from 'react';
 import axios from 'axios';
@@ -41,25 +42,31 @@ export default function SignUp() {
         }
     }
     return (
-        <Container>
-            <Title title="Cadastro" />
-            <RegisterInputs
-                infos={infos}
-                setInfos={setInfos}
-                signup={registerRequest}
-            />
-            <Button
-                onClick={() => {
-                    if (name && email && password) {
-                        registerRequest(name, email, password);
-                    } else {
-                        alert('PREENCHA OS CAMPOS CORRETAMENTE');
-                    }
-                }}
-            >
-                Cadastrar
-            </Button>
-            <Redirect text="Já tem uma conta? Entre agora!" page="/sign-in" />
-        </Container>
+        <>
+            <Navbar />
+            <Container>
+                <Title title="Cadastro" />
+                <RegisterInputs
+                    infos={infos}
+                    setInfos={setInfos}
+                    signup={registerRequest}
+                />
+                <Button
+                    onClick={() => {
+                        if (name && email && password) {
+                            registerRequest(name, email, password);
+                        } else {
+                            alert('PREENCHA OS CAMPOS CORRETAMENTE');
+                        }
+                    }}
+                >
+                    Cadastrar
+                </Button>
+                <Redirect
+                    text="Já tem uma conta? Entre agora!"
+                    page="/sign-in"
+                />
+            </Container>
+        </>
     );
 }
