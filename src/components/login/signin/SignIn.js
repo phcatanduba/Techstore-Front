@@ -12,6 +12,10 @@ export default function SignIn() {
     const password = useState('');
     const history = useHistory();
 
+    if (localStorage.getItem('user')) {
+        history.push('/');
+    }
+
     function login(email, password) {
         const promise = axios.post('http://localhost:4000/sign-in', {
             email,
