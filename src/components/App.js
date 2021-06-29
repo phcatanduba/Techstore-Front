@@ -4,6 +4,7 @@ import reset from "styled-reset";
 import SignUp from "./login/signup/SignUp";
 import SignIn from "./login/signin/SignIn";
 import Home from "./home/Home";
+import ProductPage from "./productPage/ProductPage";
 
 export default function App() {
 	return (
@@ -16,8 +17,11 @@ export default function App() {
 				<Route path="/sign-in" exact>
 					<SignIn />
 				</Route>
-				<Route path="/home" exact>
+				<Route path="/" exact>
 					<Home />
+				</Route>
+				<Route path="/product/:id" exact>
+					<ProductPage />
 				</Route>
 			</Switch>
 		</BrowserRouter>

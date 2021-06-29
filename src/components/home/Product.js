@@ -1,10 +1,12 @@
+import { useHistory } from "react-router";
 import styled from "styled-components";
 
 export default function Product({ product }) {
 	const { id, title, description, image, price } = product;
+	const history = useHistory();
 
 	return (
-		<ProductContainer>
+		<ProductContainer onClick={() => history.push(`/product/${id}`)}>
 			<ProductImage src={image} alt={title} />
 			<ProductInfos>
 				{title} <span>R$ {price.toFixed(2)}</span>
@@ -14,12 +16,12 @@ export default function Product({ product }) {
 }
 
 const ProductContainer = styled.div`
-    cursor: pointer;
+	cursor: pointer;
 	margin: 10px;
-    padding: 5px;
-    :hover{
-        border: 1px solid #0fcb0e;
-    }
+	padding: 5px;
+	:hover {
+		border: 1px solid #0fcb0e;
+	}
 `;
 const ProductImage = styled.img`
 	height: 150px;
