@@ -86,7 +86,7 @@ const Container = styled.div`
         align-items: center;
         margin-top: 20px;
         input {
-            width: 207px;
+            width: 70%;
             height: 40px;
             margin: 5px;
         }
@@ -96,7 +96,7 @@ const Container = styled.div`
         justify-content: center;
         width: 100%;
         input {
-            width: 100px;
+            width: 33%;
             margin: 0px;
         }
     }

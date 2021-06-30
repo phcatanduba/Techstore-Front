@@ -9,7 +9,7 @@ export default function Checkout() {
     return (
         <Container>
             <Header>
-                <Link to="/home">
+                <Link to="/">
                     Tech<span>Store</span>
                 </Link>
             </Header>

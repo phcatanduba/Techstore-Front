@@ -66,5 +66,6 @@ const Infos = styled.div`
         height: 32px;
         padding-right: 5px;
         font-size: 18px;
+        width: 100%;
     }
 `;

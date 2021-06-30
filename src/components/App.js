@@ -5,6 +5,7 @@ import SignUp from './login/signup/SignUp';
 import SignIn from './login/signin/SignIn';
 import Home from './home/Home';
 import ProductPage from './productPage/ProductPage';
+import Checkout from './checkout/Checkout';
 
 export default function App() {
     return (
@@ -22,6 +23,9 @@ export default function App() {
                 </Route>
                 <Route path="/product/:id" exact>
                     <ProductPage />
+                </Route>
+                <Route path="/checkout" exact>
+                    <Checkout />
                 </Route>
             </Switch>
         </BrowserRouter>
