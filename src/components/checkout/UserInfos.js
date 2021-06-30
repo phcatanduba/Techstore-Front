@@ -15,7 +15,11 @@ export default function UserInfos() {
                 </div>
                 <div>
                     <label>Telefone:</label>
-                    <input type="number" placeholder={'xx-xxxxxxxx'}></input>
+                    <input
+                        type="number"
+                        placeholder={'xx-xxxxxxxx'}
+                        required
+                    ></input>
                 </div>
             </Infos>
         </Container>

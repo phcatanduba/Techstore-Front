@@ -35,16 +35,16 @@ export default function Payment() {
                 {option === 'credit' ? (
                     <div className="credit">
                         <span>Informações de pagamento</span>
-                        <input placeholder="Nome no cartão"></input>
-                        <input placeholder="Número do cartão"></input>
+                        <input placeholder="Nome no cartão" required></input>
+                        <input placeholder="Número do cartão" required></input>
                         <div className="boxs">
-                            <input placeholder="MM/YY"></input>
-                            <input placeholder="CVC"></input>
+                            <input placeholder="MM/YY" required></input>
+                            <input placeholder="CVC" required></input>
                         </div>
                     </div>
                 ) : (
                     <div className="pix">
-                        <span>CHAVE PIX: phcatanduba@gmail.com</span>
+                        <span>CHAVE PIX: 77739138605</span>
                     </div>
                 )}
             </PaymentBox>
@@ -54,7 +54,7 @@ export default function Payment() {
 
 const Container = styled.div`
     width: 80%;
-    height: 400px;
+    min-height: 400px;
     border: 2px solid #000;
     border-radius: 5px;
     margin-top: 25px;
