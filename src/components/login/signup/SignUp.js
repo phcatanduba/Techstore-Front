@@ -2,6 +2,7 @@ import Container from '../Container';
 import Title from '../Title';
 import Button from '../Button';
 import Redirect from '../Redirect';
+import Navbar from '../../navbar/Navbar';
 import RegisterInputs from './RegisterInputs';
 import { useState } from 'react';
 import axios from 'axios';
@@ -17,7 +18,11 @@ export default function SignUp() {
     const setInfos = [setName, setEmail, setPassword, setConfirmPass, setCpf];
     let history = useHistory();
 
-    function checkPassword(password, confirmPass) {
+    if (localStorage.getItem('user')) {
+        history.push('/');
+    }
+
+    function checkPassword() {
         if (password === confirmPass) {
             return true;
         } else {
@@ -26,7 +31,7 @@ export default function SignUp() {
     }
 
     function registerRequest(name, email, password) {
-        if (checkPassword) {
+        if (checkPassword()) {
             const promise = axios.post('http://localhost:4000/sign-up', {
                 name,
                 email,
@@ -36,30 +41,44 @@ export default function SignUp() {
             promise.then((res) => {
                 history.push('/sign-in');
             });
+            promise.catch((error) => {
+                console.log(error.response);
+                if (error.response.status === 400) {
+                    alert('ERRO AO CADASTRAR, CAMPOS INCORRETOS');
+                } else if (error.response.status === 409) {
+                    alert('E-MAIL OU CPF JA CADASTRADOS');
+                }
+            });
         } else {
             alert('SENHAS NAO COINCIDEM');
         }
     }
     return (
-        <Container>
-            <Title title="Cadastro" />
-            <RegisterInputs
-                infos={infos}
-                setInfos={setInfos}
-                signup={registerRequest}
-            />
-            <Button
-                onClick={() => {
-                    if (name && email && password) {
-                        registerRequest(name, email, password);
-                    } else {
-                        alert('PREENCHA OS CAMPOS CORRETAMENTE');
-                    }
-                }}
-            >
-                Cadastrar
-            </Button>
-            <Redirect text="Já tem uma conta? Entre agora!" page="/sign-in" />
-        </Container>
+        <>
+            <Navbar />
+            <Container>
+                <Title title="Cadastro" />
+                <RegisterInputs
+                    infos={infos}
+                    setInfos={setInfos}
+                    signup={registerRequest}
+                />
+                <Button
+                    onClick={() => {
+                        if (name && email && password) {
+                            registerRequest(name, email, password);
+                        } else {
+                            alert('PREENCHA OS CAMPOS CORRETAMENTE');
+                        }
+                    }}
+                >
+                    Cadastrar
+                </Button>
+                <Redirect
+                    text="Já tem uma conta? Entre agora!"
+                    page="/sign-in"
+                />
+            </Container>
+        </>
     );
 }
