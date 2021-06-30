@@ -3,22 +3,76 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { IoPerson } from "react-icons/io5";
 import { useHistory } from "react-router";
 
+import { GiMouse as MouseIcon, GiProcessor as ProcessorIcon } from "react-icons/gi";
+import { FaKeyboard as KeyboardIcon, FaMemory as MemoryIcon } from "react-icons/fa";
+import { IoRocket as GpuIcon } from "react-icons/io5";
+import { HiFastForward as SsdIcon } from "react-icons/hi";
+
+import CategoryButtonMenu from "./CategoryButtonMenu";
+import SideFooter from "./SideFooter";
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
+
 export default function SideMenu({ setShowSideMenu }) {
-    const history = useHistory();
+	const history = useHistory();
+	const { user, setUser } = useContext(UserContext);
+
+	function logout() {
+		history.push(`/sign-in`);
+		localStorage.removeItem("user");
+		setUser(null);
+	}
+
 	return (
 		<SideContainer>
 			<MenuContainer>
 				<SideTop>
 					<IoPerson className="icon" />
 					<div>
-						<p>Bem vindo!</p>
-						<p className="user-text" onClick={()=> history.push(`/sign-in`)}>Acessar sua conta</p>
-						<p className="user-text" onClick={()=> history.push(`/sign-up`)}>Registre-se</p>
+						{user ? (
+							<>
+								<p>Olá {user.name}</p>
+								<p className="user-text" onClick={() => logout()}>
+									Sair
+								</p>
+							</>
+						) : (
+							<>
+								<p>Bem vindo!</p>
+								<p className="user-text" onClick={() => history.push(`/sign-in`)}>
+									Acessar sua conta
+								</p>
+								<p className="user-text" onClick={() => history.push(`/sign-up`)}>
+									Registre-se
+								</p>
+							</>
+						)}
 					</div>
 					<AiOutlineCloseCircle className="icon" onClick={() => setShowSideMenu(false)} />
 				</SideTop>
+				<SideContent>
+					<CategoryButtonMenu title="Mouses" to="/products/mouse">
+						<MouseIcon />
+					</CategoryButtonMenu>
+					<CategoryButtonMenu title="Teclados" to="/products/teclado">
+						<KeyboardIcon />
+					</CategoryButtonMenu>
+					<CategoryButtonMenu title="Memórias ram" to="/products/memoria_ram">
+						<MemoryIcon />
+					</CategoryButtonMenu>
+					<CategoryButtonMenu title="Processadores" to="/products/placa_de_video">
+						<ProcessorIcon />
+					</CategoryButtonMenu>
+					<CategoryButtonMenu title="Placas de vídeos" to="/products/processador">
+						<GpuIcon />
+					</CategoryButtonMenu>
+					<CategoryButtonMenu title="SSD's" to="/products/ssd">
+						<SsdIcon />
+					</CategoryButtonMenu>
+				</SideContent>
+				<SideFooter />
 			</MenuContainer>
-			<BackgroundStyle></BackgroundStyle>
+			<BackgroundStyle onClick={() => setShowSideMenu(false)}></BackgroundStyle>
 		</SideContainer>
 	);
 }
@@ -56,14 +110,16 @@ const SideTop = styled.div`
 		}
 		.user-text {
 			color: #5eae0f;
-            cursor: pointer;
+			cursor: pointer;
 		}
 	}
 `;
 
+const SideContent = styled.div``;
+
 const BackgroundStyle = styled.div`
 	z-index: 11;
-	width: 100vw;
+	width: 100%;
 	position: fixed;
 	height: 100vh;
 	opacity: 0.8;

@@ -11,5 +11,5 @@ export default function Cart() {
 
 const CartContainer = styled.div`
 	color: #0fcb0e;
-	font-size: 2em;
+	font-size: 2.6em;
 `;

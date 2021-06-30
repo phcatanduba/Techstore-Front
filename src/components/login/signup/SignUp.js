@@ -4,7 +4,7 @@ import Button from '../Button';
 import Redirect from '../Redirect';
 import Navbar from '../../navbar/Navbar';
 import RegisterInputs from './RegisterInputs';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
@@ -18,9 +18,11 @@ export default function SignUp() {
     const setInfos = [setName, setEmail, setPassword, setConfirmPass, setCpf];
     let history = useHistory();
 
-    if (localStorage.getItem('user')) {
-        history.push('/');
-    }
+    useEffect(() => {
+		if (localStorage.getItem("user")) {
+			history.push("/");
+		}
+	}, []);
 
     function checkPassword() {
         if (password === confirmPass) {

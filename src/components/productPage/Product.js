@@ -35,7 +35,7 @@ const ProductContainer = styled.div`
 	background-color: #ffffff;
 	padding: 30px;
 	margin: 15px auto;
-	box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+	box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
 	display: flex;
 	align-items: flex-start;
 	flex-direction: column;

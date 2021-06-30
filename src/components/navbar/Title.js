@@ -1,10 +1,13 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Title() {
 	return (
-		<TitleStyle>
-			Tech<span>Store</span>
-		</TitleStyle>
+		<Link to="/">
+			<TitleStyle>
+				Tech<span>Store</span>
+			</TitleStyle>
+		</Link>
 	);
 }
 
