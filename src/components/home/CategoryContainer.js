@@ -14,7 +14,7 @@ export default function CategoryContainer({ categoryName, title }) {
 		axios.get(`http://localhost:4000/products/` + categoryName, config)
 			.catch((e) => console.log(e))
 			.then((r) => setProducts(r.data));
-	}, []);
+	}, [categoryName]);
 	return (
 		<StyledContainer>
 			<h3>{title}</h3>
@@ -24,12 +24,13 @@ export default function CategoryContainer({ categoryName, title }) {
 }
 
 const StyledContainer = styled.div`
-	border: 1px solid black;
+	border: 1px solid rgba(0, 0, 0, 0.2);
 	width: 90%;
 	height: auto;
 	background-color: #ffffff;
 	padding: 10px;
 	margin: 15px auto;
+	box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.2);
 
 	& > div {
 		overflow-y: hidden;
@@ -43,6 +44,6 @@ const StyledContainer = styled.div`
 
 	h3 {
 		font-weight: 700;
-		font-size: 2em;
+		font-size: 1.5em;
 	}
 `;
