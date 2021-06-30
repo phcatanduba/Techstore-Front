@@ -14,7 +14,7 @@ export default function SignIn() {
     const history = useHistory();
 
     if (localStorage.getItem('user')) {
-        history.push('/home');
+        history.push('/');
     }
 
     function login(email, password) {

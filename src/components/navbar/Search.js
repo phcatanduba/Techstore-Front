@@ -29,14 +29,14 @@ export default function Search() {
 		<InputContainer>
 			<HiSearch className="icon-search" />
 			<DebounceInput
-				onBlur={() => setShowMenu(false)}
+				onBlur={() => setTimeout(() => setShowMenu(false), 150)}
 				onFocus={() => setShowMenu(true)}
 				minLength={3}
 				debounceTimeout={300}
 				onChange={(event) => setSearchValue(event.target.value)}
 				placeholder="Busque por produtos"
 			/>
-			{showMenu && searchValue && products.length > 0? <SearchMenu products={products} /> : null}
+			{showMenu && searchValue && products.length > 0 ? <SearchMenu products={products} /> : null}
 			<button onClick={() => getProducts()}>BUSCAR</button>
 		</InputContainer>
 	);
