@@ -10,6 +10,7 @@ export default function Payment() {
             <PaymentBox>
                 <Options>
                     <button
+                        type="button"
                         style={
                             option === 'credit'
                                 ? { border: '1px solid green' }
@@ -21,6 +22,7 @@ export default function Payment() {
                         <MdPayment style={{ fontSize: '50px' }} />
                     </button>
                     <button
+                        type="button"
                         style={
                             option === 'pix'
                                 ? { border: '1px solid green' }
