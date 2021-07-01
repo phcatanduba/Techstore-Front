@@ -23,14 +23,15 @@ const ButtonMenuContainer = styled.button`
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	font-size: 1em;
+	font-size: 30px;
 	color: #5eae0f;
 	cursor: pointer;
 
 	strong {
 		margin-left: 20px;
-		font-size: 0.6em;
+		font-size: 20px;
 		color: black;
+		word-wrap: break-all;
 	}
 
 	:hover {

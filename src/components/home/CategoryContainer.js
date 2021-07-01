@@ -9,7 +9,7 @@ export default function CategoryContainer({ categoryName, title }) {
 	useEffect(() => {
 		axios.get(`http://localhost:4000/products/` + categoryName)
 			.catch((e) => console.log(e))
-			.then((r) => setProducts(r.data));
+			.then((r) => setProducts(r?.data));
 	}, [categoryName]);
 	return (
 		<StyledContainer>

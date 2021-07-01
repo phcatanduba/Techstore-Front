@@ -1,8 +1,18 @@
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import CategoryContainer from "../home/CategoryContainer";
+import CartButton from "./CartButton";
 
 export default function Product({ product }) {
 	const { id, title, price, description, image, categoryName } = product;
+
+	const [quantity, setQuantity] = useState(0);
+	const [didOrder, setDidOrder] = useState(false);
+
+	useEffect(() => {
+		setQuantity(0);
+		setDidOrder(false);
+	}, [id]);
 
 	return (
 		<>
@@ -22,7 +32,18 @@ export default function Product({ product }) {
 					<span>Por: </span>
 					<span className="actualPrice">R$ {price.toFixed(2)}</span>
 				</ProductPrice>
-				<CartButton>Adicionar ao carrinho!</CartButton>
+				<InputQuantity>
+					<label htmlFor="quantity">Quantidade:</label>
+					<input
+						id="quantity"
+						type="number"
+						value={quantity}
+						onChange={(e) =>
+							didOrder ? quantity : setQuantity(e.target.value >= 0 ? e.target.value : 0)
+						}
+					/>
+				</InputQuantity>
+				<CartButton didOrder={didOrder} setDidOrder={setDidOrder} product={product} quantity={quantity} />
 			</ProductContainer>
 			<CategoryContainer categoryName={categoryName} title="Outros dessa categoria" />
 		</>
@@ -75,21 +96,22 @@ const ProductPrice = styled.div`
 	}
 `;
 
-const CartButton = styled.button`
-	position: absolute;
-	top: 20px;
-	right: 30px;
-	border: 1px solid #00d833;
-	outline: none;
-	background: none;
-	color: #00d833;
-	padding: 15px 60px;
-	cursor: pointer;
-	font-size: 1em;
+const InputQuantity = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-right: 50px;
 
-	:hover {
-		background-color: #77da35;
-		color: #ffffff;
-		text-decoration: underline;
+	input {
+		width: 60px;
+		height: 40px;
+		text-align: center;
+		outline-color: #77da35;
+		border: 1px solid #00d833;
+		font-size: 14px;
+	}
+
+	label {
+		margin-bottom: 10px;
 	}
 `;

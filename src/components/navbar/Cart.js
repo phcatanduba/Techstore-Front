@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import { TiShoppingCart } from "react-icons/ti";
+import {Link} from "react-router-dom";
 
 export default function Cart() {
 	return (
-		<CartContainer>
-			<TiShoppingCart />
-		</CartContainer>
+		<Link to="/checkout">
+			<CartContainer>
+				<TiShoppingCart />
+			</CartContainer>
+		</Link>
 	);
 }
 

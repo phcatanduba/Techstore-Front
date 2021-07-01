@@ -17,20 +17,22 @@ const FooterContainer = styled.div`
 	color: #303030;
 	line-height: 20px;
 	cursor: default;
-	padding: 10px;
-	margin: 100% auto 0 auto;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding-left: 15px;
 
 	* {
-		margin: 3px auto;
+		margin: 5px auto;
 	}
 	span {
-		font-size: 0.4em;
+		font-size: 15px;
 	}
 	strong {
 		color: #0fcb0e;
-		font-size: 0.6em;
+		font-size: 24px;
 	}
 	p {
-		font-size: 0.5em;
+		font-size: 18px;
 	}
 `;

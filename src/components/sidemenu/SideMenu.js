@@ -81,12 +81,13 @@ const SideContainer = styled.div``;
 
 const MenuContainer = styled.div`
 	z-index: 12;
-	width: 18vw;
-	height: 100vh;
+	width: 30vw;
+	min-width: 250px;
 	background: #ffffff;
 	position: fixed;
 	left: 0;
 	top: 0;
+	height: 100vh;
 `;
 
 const SideTop = styled.div`
@@ -105,8 +106,9 @@ const SideTop = styled.div`
 	div {
 		width: 100%;
 		p {
-			font-size: 0.5em;
+			font-size: 14px;
 			color: white;
+			margin: 5px 0;
 		}
 		.user-text {
 			color: #5eae0f;
