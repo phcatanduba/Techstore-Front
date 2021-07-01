@@ -11,12 +11,13 @@ export default function Order() {
 	}
 	const { cart, setCart } = useContext(CartContext);
 	const [total, setTotal] = useState(0);
+	const [quantityChange, setQuantityChange] = useState(false);
 
 	useEffect(() => {
 		let value = 0;
 		if (cart) cart.forEach((p) => (value += p.quantity * p.price));
 		setTotal(value);
-	}, [cart]);
+	}, [cart, quantityChange]);
 
 	useEffect(() => {
 		if (cart.length !== 0) {
@@ -28,6 +29,12 @@ export default function Order() {
 		const localCart = JSON.parse(localStorage.getItem("cart"));
 		if (localCart) setCart(localCart);
 	}, []);
+
+	useEffect(() => {
+		if (cart.length === 0) {
+			localStorage.removeItem("cart");
+		}
+	}, [quantityChange]);
 
 	return (
 		<Container>
@@ -46,6 +53,9 @@ export default function Order() {
 									total={total}
 									setTotal={setTotal}
 									currencyBRL={currencyBRL}
+									setCart={setCart}
+									quantityChange={quantityChange}
+									setQuantityChange={setQuantityChange}
 								/>
 							);
 					  })
