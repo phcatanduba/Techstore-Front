@@ -4,6 +4,7 @@ import Navbar from "../navbar/Navbar";
 import CategoryContainer from "./CategoryContainer";
 
 export default function Home() {
+
 	return (
 		<ContainerHome>
 			<Navbar />

@@ -7,14 +7,22 @@ import Home from "./home/Home";
 import ProductPage from "./productPage/ProductPage";
 import Checkout from "./checkout/Checkout";
 import CategoryPage from "./categoryPage/CategoryPage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserContext from "../contexts/UserContext";
 import CartContext from "../contexts/CartContext";
-import AuthUser from "../utilFunctions/AuthUser";
+import AuthUser from "../utilFunctions/isLogin";
+import PrivateRoute from "./PrivateRoute";
 
 export default function App() {
 	const [user, setUser] = useState(null);
 	const [cart, setCart] = useState([]);
+
+	useEffect(() => {
+		if (localStorage.getItem("user")) {
+			const user = localStorage.getItem("user");
+			setUser(JSON.parse(user));
+		}
+	}, []);
 
 	return (
 		<CartContext.Provider value={{ cart, setCart }}>
@@ -32,14 +40,14 @@ export default function App() {
 							<Home />
 						</Route>
 						<Route path="/product/:id" exact>
-                            {<AuthUser setUser={setUser}/>}
+							{<AuthUser setUser={setUser} />}
 							<ProductPage />
 						</Route>
 						<Route path="/products/:category" exact>
 							<CategoryPage />
 						</Route>
 						<Route path="/checkout" exact>
-							<Checkout />
+							<PrivateRoute component={<Checkout />} />
 						</Route>
 					</Switch>
 				</BrowserRouter>

@@ -10,10 +10,6 @@ export default function Order() {
 	}
 	const { cart, setCart } = useContext(CartContext);
 
-	useEffect(() => {
-        console.log(cart);
-	}, [cart]);
-
 	let total = 0;
 	return (
 		<Container>
