@@ -30,6 +30,7 @@ const ProductImage = styled.img`
 	margin-bottom: 5px;
 `;
 const ProductInfos = styled.p`
+	margin-top: 15px;
 	font-weight: 700;
 	font-size: 0.99em;
 	span {

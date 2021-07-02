@@ -9,18 +9,12 @@ export default function Search() {
 	const [searchValue, setSearchValue] = useState(null);
 	const [showMenu, setShowMenu] = useState(false);
 	const [products, setProducts] = useState(false);
-
 	useEffect(() => {
 		getProducts();
 	}, [searchValue]);
 
 	function getProducts() {
-		const config = {
-			headers: {
-				authorization: "Bearer 1",
-			},
-		};
-		axios.get(`http://localhost:4000/products?search=` + searchValue, config)
+		axios.get(`http://localhost:4000/products?search=` + searchValue)
 			.then((r) => setProducts(r.data))
 			.catch((e) => console.log(e));
 	}
@@ -43,14 +37,16 @@ export default function Search() {
 }
 
 const InputContainer = styled.div`
-	width: 100%;
+	max-width: 70%;
+    min-width: 300px;
 	max-height: 36px;
 	position: relative;
+    margin-top: 5px;
 
 	input {
 		margin: 0 auto;
 		width: 100%;
-		height: 100%;
+		height: 36px;
 		border-radius: 30px;
 		border: none;
 		outline: none;

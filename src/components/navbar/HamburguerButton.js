@@ -16,5 +16,5 @@ export default function Search() {
 const HambContainer = styled.div`
 	cursor: pointer;
 	color: #0fcb0e;
-	font-size: 2em;
+	font-size: 2.6em;
 `;

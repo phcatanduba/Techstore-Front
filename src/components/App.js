@@ -1,35 +1,59 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
-import SignUp from './login/signup/SignUp';
-import SignIn from './login/signin/SignIn';
-import Home from './home/Home';
-import ProductPage from './productPage/ProductPage';
-import Checkout from './checkout/Checkout';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
+import SignUp from "./login/signup/SignUp";
+import SignIn from "./login/signin/SignIn";
+import Home from "./home/Home";
+import ProductPage from "./productPage/ProductPage";
+import Checkout from "./checkout/Checkout";
+import CategoryPage from "./categoryPage/CategoryPage";
+import { useEffect, useState } from "react";
+import UserContext from "../contexts/UserContext";
+import CartContext from "../contexts/CartContext";
+import AuthUser from "../utilFunctions/isLogin";
+import PrivateRoute from "./PrivateRoute";
 
 export default function App() {
-    return (
-        <BrowserRouter>
-            <Styles />
-            <Switch>
-                <Route path="/sign-up" exact>
-                    <SignUp />
-                </Route>
-                <Route path="/sign-in" exact>
-                    <SignIn />
-                </Route>
-                <Route path="/" exact>
-                    <Home />
-                </Route>
-                <Route path="/product/:id" exact>
-                    <ProductPage />
-                </Route>
-                <Route path="/checkout" exact>
-                    <Checkout />
-                </Route>
-            </Switch>
-        </BrowserRouter>
-    );
+	const [user, setUser] = useState(null);
+	const [cart, setCart] = useState([]);
+
+	useEffect(() => {
+		if (localStorage.getItem("user")) {
+			const user = localStorage.getItem("user");
+			setUser(JSON.parse(user));
+		}
+	}, []);
+
+	return (
+		<CartContext.Provider value={{ cart, setCart }}>
+			<UserContext.Provider value={{ user, setUser }}>
+				<BrowserRouter>
+					<Styles />
+					<Switch>
+						<Route path="/sign-up" exact>
+							<SignUp />
+						</Route>
+						<Route path="/sign-in" exact>
+							<SignIn />
+						</Route>
+						<Route path="/" exact>
+							<Home />
+						</Route>
+						<Route path="/product/:id" exact>
+							{<AuthUser setUser={setUser} />}
+							<ProductPage />
+						</Route>
+						<Route path="/products/:category" exact>
+							<CategoryPage />
+						</Route>
+						<Route path="/checkout" exact>
+							<PrivateRoute component={<Checkout />} />
+						</Route>
+					</Switch>
+				</BrowserRouter>
+			</UserContext.Provider>
+		</CartContext.Provider>
+	);
 }
 
 const Styles = createGlobalStyle`
@@ -37,9 +61,18 @@ const Styles = createGlobalStyle`
     a {
         text-decoration: none;
     }
+
     body { 
         font-family: 'Roboto', sans-serif;
-        box-sizing: border-box;
         background-color:#f7f7f7;
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    strong{
+        font-weight: 700;
     }
 `;

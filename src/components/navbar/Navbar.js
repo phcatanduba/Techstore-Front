@@ -19,14 +19,15 @@ export default function Navbar() {
 
 const StyledNavBar = styled.div`
 	background-color: #232323;
-	width: 100vw;
+	width: 100%;
 	height: 112px;
-	padding: 10px;
+	padding: 10px 20px;
 	border-top: 2px solid #0fcb0e;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
+	box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.4);
 
 	& > div {
 		width: 100%;
