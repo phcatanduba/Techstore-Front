@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import UserContext from '../../contexts/UserContext';
 
-export default function UserInfos() {
+export default function UserInfos({email, setEmail}) {
     const { user, setUser } = useContext(UserContext);
     useEffect(() => {
         if (localStorage.getItem('user')) {
