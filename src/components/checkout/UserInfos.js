@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export default function UserInfos() {
+export default function UserInfos({email, setEmail}) {
     return (
         <Container>
-            <p>INFORMAÇÔES PESSOAIS</p>
+            <p>INFORMAÇÕES PESSOAIS</p>
             <Infos>
                 <div>
                     <label>Nome:</label>
@@ -12,6 +12,10 @@ export default function UserInfos() {
                 <div>
                     <label>CPF:</label>
                     <input value={'01234567890'} readOnly></input>
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="email" value={email} onChange={e=> setEmail(e.target.value)} placeholder="Seu email"></input>
                 </div>
                 <div>
                     <label>Telefone:</label>
@@ -28,7 +32,7 @@ export default function UserInfos() {
 
 const Container = styled.div`
     width: 80%;
-    height: 400px;
+    height: 440px;
     border: 2px solid #000;
     border-radius: 5px;
     margin-top: 90px;
@@ -49,7 +53,7 @@ const Container = styled.div`
 
 const Infos = styled.div`
     width: 90%;
-    height: 300px;
+    height: 340px;
     margin-top: 25px;
     background: #f2f2f2;
     border: 1px solid #ddd;
