@@ -34,7 +34,7 @@ export default function SignUp() {
 
     function registerRequest(name, email, password) {
         if (checkPassword()) {
-            const promise = axios.post('http://localhost:4000/sign-up', {
+            const promise = axios.post('https://back-techstore.herokuapp.com/sign-up', {
                 name,
                 email,
                 password,

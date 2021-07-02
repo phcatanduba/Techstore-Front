@@ -14,7 +14,7 @@ export default function Search() {
 	}, [searchValue]);
 
 	function getProducts() {
-		axios.get(`http://localhost:4000/products?search=` + searchValue)
+		axios.get(`https://back-techstore.herokuapp.com/products?search=` + searchValue)
 			.then((r) => setProducts(r.data))
 			.catch((e) => console.log(e));
 	}
