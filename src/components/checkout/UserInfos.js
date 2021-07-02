@@ -1,17 +1,20 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
+import UserContext from '../../contexts/UserContext';
 
 export default function UserInfos() {
+    const { user } = useContext(UserContext);
     return (
         <Container>
             <p>INFORMAÇÔES PESSOAIS</p>
             <Infos>
                 <div>
                     <label>Nome:</label>
-                    <input value={'Pedro'} readOnly></input>
+                    <input value={user.name} readOnly></input>
                 </div>
                 <div>
                     <label>CPF:</label>
-                    <input value={'01234567890'} readOnly></input>
+                    <input value={user.cpf} readOnly></input>
                 </div>
                 <div>
                     <label>Telefone:</label>
