@@ -5,7 +5,7 @@ import Order from './Order';
 import styled from 'styled-components';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 import CartContext from '../../contexts/CartContext';
 
@@ -13,13 +13,14 @@ export default function Checkout() {
     const history = useHistory();
     const { user } = useContext(UserContext);
     const { cart } = useContext(CartContext);
+    const [email, setEmail] = useState(null);
 
     function sale(e) {
         e.preventDefault();
         console.log(e);
         const promise = axios.post(
             'http://localhost:4000/sales',
-            { cart },
+            { cart, email },
             {
                 headers: {
                     authorization: `Bearer ${user.token}`,
@@ -42,7 +43,7 @@ export default function Checkout() {
                         Tech<span>Store</span>
                     </Link>
                 </Header>
-                <UserInfos />
+                <UserInfos email={email} setEmail={setEmail}/>
                 <Payment />
                 <Order />
                 <Button type="submit">Finalizar compra</Button>
