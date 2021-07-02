@@ -3,13 +3,40 @@ import UserInfos from './UserInfos';
 import Payment from './Payment';
 import Order from './Order';
 import styled from 'styled-components';
+import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
+import { useContext } from 'react';
+import UserContext from '../../contexts/UserContext';
+import CartContext from '../../contexts/CartContext';
 
 export default function Checkout() {
     const history = useHistory();
+    const { user } = useContext(UserContext);
+    const { cart } = useContext(CartContext);
+
+    function sale(e) {
+        e.preventDefault();
+        console.log(e);
+        const promise = axios.post(
+            'http://localhost:4000/sales',
+            { cart },
+            {
+                headers: {
+                    authorization: `Bearer ${user.token}`,
+                },
+            }
+        );
+        promise.then(() => {
+            alert('COMPRA CONCLUIDA');
+            history.push('/');
+        });
+        promise.catch(() => {
+            alert('ERRO AO COMPRAR');
+        });
+    }
     return (
         <Container>
-            <form>
+            <form onSubmit={(e) => sale(e)}>
                 <Header>
                     <Link to="/">
                         Tech<span>Store</span>
@@ -20,7 +47,7 @@ export default function Checkout() {
                 <Order />
                 <Button type="submit">Finalizar compra</Button>
             </form>
-            <Cancel onClick={() => history.push("/")}>Cancelar compra</Cancel>
+            <Cancel onClick={() => history.push('/')}>Cancelar compra</Cancel>
         </Container>
     );
 }
