@@ -22,7 +22,7 @@ export default function SignIn() {
 	}, []);
 
 	function login(email, password) {
-		const promise = axios.post("http://localhost:4000/sign-in", {
+		const promise = axios.post("https://back-techstore.herokuapp.com/sign-in", {
 			email,
 			password,
 		});

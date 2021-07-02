@@ -7,7 +7,7 @@ export default function CategoryContainer({ categoryName, title }) {
 	const [products, setProducts] = useState(false);
 
 	useEffect(() => {
-		axios.get(`http://localhost:4000/products/` + categoryName)
+		axios.get(`https://back-techstore.herokuapp.com/products/` + categoryName)
 			.catch((e) => console.log(e))
 			.then((r) => setProducts(r?.data));
 	}, [categoryName]);

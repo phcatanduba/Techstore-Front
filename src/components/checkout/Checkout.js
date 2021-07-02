@@ -19,7 +19,7 @@ export default function Checkout() {
         e.preventDefault();
         console.log(e);
         const promise = axios.post(
-            'http://localhost:4000/sales',
+            'https://back-techstore.herokuapp.com/sales',
             { cart, email },
             {
                 headers: {

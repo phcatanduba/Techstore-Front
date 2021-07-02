@@ -11,7 +11,7 @@ export default function ProductPage() {
 	const [product, setProduct] = useState(false);
 
 	useEffect(() => {
-		axios.get(`http://localhost:4000/product/` + id)
+		axios.get(`https://back-techstore.herokuapp.com/product/` + id)
 			.catch((e) => console.log(e))
 			.then((r) => setProduct(r.data));
 	}, [id]);
