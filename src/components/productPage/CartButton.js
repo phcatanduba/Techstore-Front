@@ -9,22 +9,24 @@ export default function CartButton({ quantity, product, didOrder, setDidOrder })
 	const { id, title, price, description, image, categoryName } = product;
 
 	function addToCart() {
-		const newOrder = {
-			name: title,
-			id,
-			image,
-			price,
-			quantity: parseInt(quantity),
-		};
-		setCart([...cart, newOrder]);
-		setDidOrder(true);
+		if(quantity > 0 && user && !didOrder){
+            const newOrder = {
+                name: title,
+                id,
+                image,
+                price,
+                quantity: parseInt(quantity),
+            };
+            setCart([...cart, newOrder]);
+            setDidOrder(true);
+        }
 	}
 
 	return (
 		<CartButtonContainer>
 			<button
 				onClick={() => {
-					if (quantity > 0 && user && !didOrder) addToCart();
+					addToCart();
 				}}
 			>
 				{didOrder

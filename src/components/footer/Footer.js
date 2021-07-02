@@ -37,8 +37,15 @@ const FooterContainer = styled.div`
 	padding: 40px;
 	margin: 300px auto 0 auto;
 	width: 100%;
-	height: 300px;
+	height: auto;
 	display: flex;
+
+    @media (max-width: 650px) {
+		flex-direction: column;
+		div {
+			margin-bottom: 15px;
+		}
+	}
 `;
 
 const AttendanceContainer = styled.div`

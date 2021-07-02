@@ -61,6 +61,10 @@ const ProductContainer = styled.div`
 	align-items: flex-start;
 	flex-direction: column;
 	position: relative;
+
+    @media (max-width: 530px) {
+		padding-top: 100px;
+	}
 `;
 
 const ProductDescription = styled.div`
