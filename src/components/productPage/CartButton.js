@@ -14,7 +14,7 @@ export default function CartButton({ quantity, product, didOrder, setDidOrder })
 			id,
 			image,
 			price,
-			quantity,
+			quantity: parseInt(quantity),
 		};
 		setCart([...cart, newOrder]);
 		setDidOrder(true);

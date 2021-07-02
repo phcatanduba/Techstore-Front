@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { MdShoppingCart } from "react-icons/md";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import CartContext from "../../contexts/CartContext";
+import Product from "./Product";
 
 export default function Order() {
 	function currencyBRL(value) {
@@ -9,8 +10,32 @@ export default function Order() {
 		return value.toLocaleString("pt-BR", options);
 	}
 	const { cart, setCart } = useContext(CartContext);
+	const [total, setTotal] = useState(0);
+	const [quantityChange, setQuantityChange] = useState(false);
 
-	let total = 0;
+	useEffect(() => {
+		let value = 0;
+		if (cart) cart.forEach((p) => (value += p.quantity * p.price));
+		setTotal(value);
+	}, [cart, quantityChange]);
+
+	useEffect(() => {
+		if (cart.length !== 0) {
+			localStorage.setItem("cart", JSON.stringify(cart));
+		}
+	}, [total]);
+
+	useEffect(() => {
+		const localCart = JSON.parse(localStorage.getItem("cart"));
+		if (localCart) setCart(localCart);
+	}, []);
+
+	useEffect(() => {
+		if (cart.length === 0) {
+			localStorage.removeItem("cart");
+		}
+	}, [quantityChange]);
+
 	return (
 		<Container>
 			<p>
@@ -18,25 +43,23 @@ export default function Order() {
 				RESUMO DO PEDIDO
 			</p>
 			<Infos>
-				{cart ? cart.map((p) => {
-					total += p.price * p.quantity;
-					return (
-						<Product key={p.id}>
-							<div>
-								<span className="product">{p.name}</span>
-								<img src={p.image} alt="product"></img>
-							</div>
-							<div>
-								<label>Quantidade:</label>
-								<span>{p.quantity}</span>
-							</div>
-							<div>
-								<label>Preço:</label>
-								<span>{currencyBRL(p.price)}</span>
-							</div>
-						</Product>
-					);
-				}): null}
+				{cart
+					? cart.map((p) => {
+							return (
+								<Product
+									cart={cart}
+									p={p}
+									key={p.id}
+									total={total}
+									setTotal={setTotal}
+									currencyBRL={currencyBRL}
+									setCart={setCart}
+									quantityChange={quantityChange}
+									setQuantityChange={setQuantityChange}
+								/>
+							);
+					  })
+					: null}
 				<Total>TOTAL: {currencyBRL(total)}</Total>
 			</Infos>
 		</Container>
@@ -85,32 +108,6 @@ const Infos = styled.div`
 		padding-right: 5px;
 		font-size: 18px;
 		width: 100%;
-	}
-`;
-
-const Product = styled.div`
-	border-bottom: 1px solid green;
-	img {
-		width: 60px;
-	}
-	div {
-		display: flex;
-		align-items: center;
-		width: 60%;
-		margin: 25px;
-	}
-
-	.product {
-		font-size: 22px;
-		font-weight: bold;
-	}
-
-	div:first-child {
-		justify-content: space-between;
-	}
-
-	label {
-		margin-right: 5px;
 	}
 `;
 

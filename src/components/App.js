@@ -46,9 +46,7 @@ export default function App() {
 						<Route path="/products/:category" exact>
 							<CategoryPage />
 						</Route>
-						<Route path="/checkout" exact>
-							<PrivateRoute component={<Checkout />} />
-						</Route>
+						<PrivateRoute component={Checkout} path="/checkout" exact />
 					</Switch>
 				</BrowserRouter>
 			</UserContext.Provider>

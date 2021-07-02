@@ -3,9 +3,10 @@ import UserInfos from './UserInfos';
 import Payment from './Payment';
 import Order from './Order';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function Checkout() {
+    const history = useHistory();
     return (
         <Container>
             <form>
@@ -19,7 +20,7 @@ export default function Checkout() {
                 <Order />
                 <Button type="submit">Finalizar compra</Button>
             </form>
-            <Cancel>Cancelar compra</Cancel>
+            <Cancel onClick={() => history.push("/")}>Cancelar compra</Cancel>
         </Container>
     );
 }
